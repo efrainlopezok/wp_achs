@@ -1,0 +1,345 @@
+<?php
+/**
+ * Template Name: Home Page
+ *
+ * @package WordPress
+ * @subpackage ACHS
+ * @since ACHS
+ */
+
+
+//* Remove .site-inner
+
+/* # Home Page Block Sections
+---------------------------------------------------------------------------------------------------- */
+add_action( 'genesis_after_header', 'home_row_sections' , 2 );
+function home_row_sections() {
+    $box_small_title    = get_field('box_small_title');
+    $box_title          = get_field('box_title');
+    $box_button_text    = get_field('box_button_text');
+    $box_button_link    = get_field('box_button_link');
+    $box_image          = get_field('box_image');
+
+    $box_small_title2    = get_field('box_tab2_box_small_title');
+    $box_title2          = get_field('box_tab2_box_title');
+    $box_button_text2    = get_field('box_tab2_box_button_text');
+    $box_button_link2    = get_field('box_tab2_box_button_link');
+    $box_image2          = get_field('box_tab2_box_image');
+
+    $box_small_title3    = get_field('box_tab3_box_small_title');
+    $box_title3          = get_field('box_tab3_box_title');
+    $box_button_text3    = get_field('box_tab3_box_button_text');
+    $box_button_link3    = get_field('box_tab3_box_button_link');
+    $box_image3          = get_field('box_tab3_box_image');
+   ?>
+   <!-- Home Box Section -->
+   <section class="section boxes" id="home-box">
+        <div class="wrap">
+            <div class="row">
+                <!--First columnn-->
+                <div class="col m4 s12 animatedParent">
+                    <!--Card-->
+                    <div class="box-card animated fadeInUp" style="background-image: url('<?php echo $box_image; ?>')">
+                        <div class="box-card-content">
+                            <h5><?php echo $box_small_title; ?></h5>
+                            <h3><?php echo $box_title; ?></h3>
+                            <a href="<?php echo $box_button_link; ?>" class="btn-box btn-box-green"><?php echo $box_button_text; ?> <i class="fas fa-caret-right"></i></a>
+                        </div>
+                    </div>
+                    <!--/.Card-->
+                </div>
+                <!--First columnn-->
+
+                <!--Second columnn-->
+                <div class="col m4 s12 animatedParent">
+                    <!--Card-->
+                    <div class="box-card  animated fadeInUp" style="background-image: url('<?php echo $box_image2; ?>')">
+                        <div class="box-card-content">
+                            <h5><?php echo $box_small_title2; ?></h5>
+                            <h3><?php echo $box_title2; ?></h3>
+                            <a href="<?php echo $box_button_link2; ?>" class="btn-box btn-box-blue"><?php echo $box_button_text2; ?> <i class="fas fa-caret-right"></i></a>
+                        </div>
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Second columnn-->
+
+                <!--Third columnn-->
+                <div class="col m4 mb-4 s12 animatedParent">
+                    <!--Card-->
+                    <div class="box-card  animated fadeInUp" style="background-image: url('<?php echo $box_image3; ?>')">
+                        <div class="box-card-content">
+                            <h5><?php echo $box_small_title3; ?></h5>
+                            <h3><?php echo $box_title3; ?></h3>
+                            <a href="<?php echo $box_button_link3; ?>" class="btn-box btn-box-orange"><?php echo $box_button_text3; ?> <i class="fas fa-caret-right"></i></a>
+                        </div>
+                    </div>
+                    <!--/.Card-->
+                </div>
+                <!--Third columnn-->
+            </div>
+        </div>
+   </section>
+   <!--/. End Home Box Section -->
+   <?php
+        $section_small_title        = get_field('section_small_title','option');
+        $section_title              = get_field('section_title','option');
+        $services                   = get_field('services','option');
+   ?>
+    <!--  Home Services -->
+   <section class="section services section-space top-image" id="home-services">
+       <div class="wrap">
+            <div class="row">
+                <h4><?php echo $section_small_title; ?></h4>
+                <h2><?php echo $section_title; ?></h2>
+                <?php
+                    if($services):
+                        foreach($services as $row) {
+                            ?>
+                                <div class="col m4 l4 xl3 s12">
+                                    <div class="service animatedParent">
+                                        <a href="<?php echo $row['link_service'];?>">
+                                            <div class="service-image animated fadeIn" style="background-image: url('<?php echo $row['service_image']; ?>')">
+                                                <div class="service-image-hover">
+                                                    <div class="service-white-transparent">
+                                                        <img src="<?php echo $row['icon_service'];?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="<?php echo $row['link_service'];?>"><h3><?php echo $row['service_title']?></h3></a>
+                                        <?php echo $row['service_content']?>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                    endif;
+                ?>
+            </div>
+       </div>
+   </section>
+    <!--/. End Home Services -->
+    <?php
+        $locations_short_title          = get_field('locations_short_title','option');
+        $locations_title                  = get_field('locations_title','option');
+        // Tab1
+        $tab_title                  = get_field('tab_title','option');
+        $tab_image                  = get_field('tab_image','option');
+        $tab_content                = get_field('tab_content','option');
+         // Tab2
+        $dental_tab_title                  = get_field('dental_tab_title','option');
+        $dental_tab_image                  = get_field('dental_tab_image','option');
+        $dental_tab_content                = get_field('dental_tab_content','option');
+          // Tab3
+        $franconia_content_tab_title                  = get_field('franconia_content_tab_title','option');
+        $franconia_content_tab_image                  = get_field('franconia_content_tab_image','option');
+        $franconia_content_tab_content                = get_field('franconia_content_tab_content','option');
+         // Tab4
+         $warren_content_tab_title                  = get_field('warren_content_tab_title','option');
+         $warren_content_tab_image                  = get_field('warren_content_tab_image','option');
+         $warren_content_tab_content                = get_field('warren_content_tab_content','option');
+          // Tab5
+        $whitefield_content_tab_title                  = get_field('whitefield_content_tab_title','option');
+        $whitefield_content_tab_image                  = get_field('whitefield_content_tab_image','option');
+        $whitefield_content_tab_content                = get_field('whitefield_content_tab_content','option');
+         // Tab6
+        $woodsville_content_tab_title                  = get_field('woodsville_content_tab_title','option');
+        $woodsville_content_tab_image                  = get_field('woodsville_content_tab_image','option');
+        $woodsville_content_tab_content                = get_field('woodsville_content_tab_content','option');
+        
+   ?>
+    <!--  Home Locations -->
+    <section class="section locations section-space top-image" id="home-locations">
+        <div class="wrap animatedParent">
+                <div class="row animated fadeIn">
+                    <h4><?php echo $locations_short_title; ?></h4>
+                    <h2><?php echo $locations_title; ?></h2>      
+                    <div class="col s12">
+                        <!-- Dropdown Structure -->
+                        <a class='btn current-element-tab' href='#'><?php echo $tab_title;?></a>
+                        <ul class="tab-dropdown">
+                            <li class="item-dropdown"><a class="active" href="#tab1"><?php echo $tab_title;?></a></li>
+                            <li class="item-dropdown"><a href="#tab3"><?php echo $franconia_content_tab_title;?></a></li>
+                            <li class="item-dropdown"><a href="#tab4"><?php echo $warren_content_tab_title;?></a></li>
+                            <li class="item-dropdown"><a href="#tab6"><?php echo $woodsville_content_tab_title;?></a></li>
+                            <li class="item-dropdown"><a href="#tab5"><?php echo $whitefield_content_tab_title;?></a></li>
+                        </ul>
+                        <!-- Dropdown Structure -->
+                        <ul class="tabs tabs-fixed-width">
+                            <li class="tab col s3"><a class="active" href="#tab1"><?php echo $tab_title;?></a></li>
+                            <!-- <li class="tab col s3"><a href="#tab2"><?php echo $dental_tab_title;?></a></li> -->
+                            <li class="tab col s3"><a href="#tab3"><?php echo $franconia_content_tab_title;?></a></li>
+                            <li class="tab col s3"><a href="#tab4"><?php echo $warren_content_tab_title;?></a></li>
+                            <li class="tab col s3"><a href="#tab6"><?php echo $woodsville_content_tab_title;?></a></li>
+                            <li class="tab col s3"><a href="#tab5"><?php echo $whitefield_content_tab_title;?></a></li>
+                        </ul>
+                    </div>
+                    <div id="tab1" class="col s12 tab-content">
+                        <div class="row">
+                            <div class="col s12 m4 l6" style="background-image: url('<?php echo $tab_image;?>')">
+                            </div>
+                            <div class="col s12 m8 l6 map-content" style="background-image: url('<?php echo get_stylesheet_directory_uri()?>/assets/images/map.jpg')">
+                                <div class="map-content-txt">
+                                <?php echo $tab_content;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div id="tab2" class="col s12 tab-content">
+                        <div class="row">
+                            <div class="col s12 m4 l6" style="background-image: url('<?php echo $dental_tab_image;?>')">
+                            </div>
+                            <div class="col s12 m8 l6 map-content" style="background-image: url('<?php echo get_stylesheet_directory_uri()?>/assets/images/map.jpg')">
+                                <div class="map-content-txt">
+                                <?php echo $dental_tab_content;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div id="tab3" class="col s12 tab-content">
+                        <div class="row">
+                            <div class="col s12 m4 l6" style="background-image: url('<?php echo $franconia_content_tab_image;?>')">
+                            </div>
+                            <div class="col s12 m8 l6 map-content" style="background-image: url('<?php echo get_stylesheet_directory_uri()?>/assets/images/map.jpg')">
+                                <div class="map-content-txt">    
+                                <?php echo $franconia_content_tab_content;?>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab4" class="col s12 tab-content">
+                        <div class="row">
+                            <div class="col s12 m4 l6" style="background-image: url('<?php echo $warren_content_tab_image;?>')">
+                            </div>
+                            <div class="col s12 m8 l6 map-content" style="background-image: url('<?php echo get_stylesheet_directory_uri()?>/assets/images/map.jpg')">
+                                <div class="map-content-txt">
+                                <?php echo $warren_content_tab_content;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab5" class="col s12 tab-content">
+                        <div class="row">
+                            <div class="col s12 m4 l6" style="background-image: url('<?php echo $whitefield_content_tab_image;?>')">
+                            </div>
+                            <div class="col s12 m8 l6 map-content" style="background-image: url('<?php echo get_stylesheet_directory_uri()?>/assets/images/map.jpg')">
+                                <div class="map-content-txt">
+                                <?php echo $whitefield_content_tab_content;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab6" class="col s12 tab-content ">
+                        <div class="row">
+                            <div class="col s12 m4 l6" style="background-image: url('<?php echo $woodsville_content_tab_image;?>')">
+                            </div>
+                            <div class="col s12 m8 l6 map-content" style="background-image: url('<?php echo get_stylesheet_directory_uri()?>/assets/images/map.jpg')">
+                                <div class="map-content-txt">
+                                <?php echo $woodsville_content_tab_content;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <!--/. End Home Locations -->
+    <?php
+        $call_content                   = get_field('call_content','option');
+        $call_button_text               = get_field('call_button_text','option');
+        $call_button_link               = get_field('call_button_link','option');
+        $call_images                    = get_field('images_section', 'option');
+        $cant = count($call_images);
+        $ic = rand(0, $cant-1);
+   ?>
+     <!--  Home Call Action-->
+     <section class="call-action" id="home-call-action" style="background-image: url(<?php echo $call_images[$ic]['background_section']?>);">
+         <div class="wrap">
+                <div class="row animatedParent">
+                        <div class="col m5 s12 call-content animated fadeInLeft">
+                            <?php echo $call_content; ?>
+                            <p><a class="btn btn-transparent-orange" href="<?php echo  $call_button_link;?>"><?php echo  $call_button_text;?> <i class="fas fa-caret-right"></i></a></p>
+                        </div>
+                        <div class="col m7 floating-image">
+                                <img src="<?php echo $call_images[$ic]['image_section']?>" />
+                        </div>
+                </div>
+         </div>
+    </section>
+     <!--/. End Home Call Action -->
+     <?php
+        // col1
+        $bottom_image                       = get_field('bottom_image','option');
+        $bottom_title                       = get_field('bottom_title','option');
+        $bottom_content                     = get_field('bottom_content','option');
+        $bottom_button_text             = get_field('bottom_button_text','option');
+        $bottom_button_link             = get_field('bottom_button_link','option');
+        // col2
+        $up_events_bottom_image                       = get_field('up_events_bottom_image','option');
+        $up_events_bottom_title                       = get_field('up_events_bottom_title','option');
+        $up_events_bottom_content                     = get_field('up_events_bottom_content','option');
+        $up_events_bottom_button_text             = get_field('up_events_bottom_button_text','option');
+        $up_events_bottom_button_link             = get_field('up_events_bottom_button_link','option');
+        // col3
+        $spotlight_bottom_image                       = get_field('spotlight_bottom_image','option');
+        $spotlight_bottom_title                       = get_field('spotlight_bottom_title','option');
+        $spotlight_bottom_content                     = get_field('spotlight_bottom_content','option');
+        $spotlight_bottom_button_text             = get_field('spotlight_bottom_button_text','option');
+        $spotlight_bottom_button_link             = get_field('spotlight_bottom_button_link','option');
+   ?>
+     <!--  Home Bootom Section-->
+    <section class="section home-bottom section-space" id="home-bottom">
+        <div class="wrap animatedParent">
+            <div class="row animated fadeIn">
+                    <div class="col s12 m4 l4">
+                        <div class="service">
+                            <div class="service-image" style="background-image: url('<?php echo $bottom_image; ?>')">
+                                <div class="service-image-hover">
+                                    <a href="<?php echo $bottom_button_link['url'];?>">
+                                        <div class="service-white-transparent"></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3><?php echo $bottom_title?></h3>
+                            <?php echo $bottom_content;?>
+                            <p><a href="<?php echo $bottom_button_link['url'];?>"><?php echo $bottom_button_text;?> <i class="fas fa-caret-right"></i></a></p>
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="service">
+                            <div class="service-image" style="background-image: url('<?php echo $up_events_bottom_image; ?>')">
+                                <div class="service-image-hover">
+                                    <a href="<?php echo $up_events_bottom_button_link['url'];?>">
+                                        <div class="service-white-transparent"></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3><?php echo $up_events_bottom_title ?></h3>
+                            <?php echo $up_events_bottom_content;?>
+                            <p><a href="<?php echo $up_events_bottom_button_link['url'];?>"><?php echo $up_events_bottom_button_text;?> <i class="fas fa-caret-right"></i></a></p>
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="service">
+                            <div class="service-image" style="background-image: url('<?php echo $spotlight_bottom_image; ?>')">
+                                <div class="service-image-hover">
+                                    <a href="<?php echo $spotlight_bottom_button_link['url'];?>">
+                                        <div class="service-white-transparent"></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3><?php echo $spotlight_bottom_title?></h3>
+                            <?php echo $spotlight_bottom_content;?>
+                            <p><a href="<?php echo $spotlight_bottom_button_link['url'];?>"><?php echo $spotlight_bottom_button_text;?> <i class="fas fa-caret-right"></i></a></p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+     <!--/. End Home Bootom Section -->
+   <?php
+}
+
+
+genesis();

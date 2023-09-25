@@ -1,0 +1,92 @@
+.locations {
+    // .call-action {
+    //     margin-top: 0px !important;
+    //     .call-content {
+    //         float: none !important;
+    //     }
+    // }
+    .site-inner {
+        h2 {
+            color: #4b9561;
+            margin-top: 0px;
+        }
+        a {
+            text-decoration: underline;
+            color: #f88e1b;
+            font-weight: 600;
+        }
+    }
+    .sidebar {
+        h4 {
+            font-size: 24px;
+            color: #17516b;
+        }
+        section {
+            &:first-child {
+                p {
+                    color: #4e514e;
+                    font-weight: 600;
+                }
+            }
+        }
+        .widget {
+            padding: 10px 40px 0px 40px;
+            &:first-child {
+                padding-top: 40px;
+            }
+        }
+    }
+}
+
+.custom-sidebar-services {
+    max-width: 300px;
+    &.row-fluid {
+        .span3 {
+            width: 22.9282%;
+            float: left;
+            margin-left: 2.76%;
+        }
+        [class*="span"]:first-child {
+            margin-left: 0;
+        }
+        a:hover {
+            opacity: .5;
+        }
+    }
+}
+
+.myprefix-button {
+    &.btn-transparent-orange {
+        color: #f88e1b !important;
+        border: 2px solid #f88e1b;
+        background-color: transparent !important;
+        font-weight: 400 !important;
+        font-family: $secondaryFont;
+        font-size: 16px;
+        padding: 15px;
+        text-decoration: none !important;
+        text-transform: uppercase;
+        @media screen and (max-width: 550px) {
+            font-size: 12px;
+            padding: 10px;
+        }
+        &:hover {
+            background-color: #f88e1b !important;
+            color: #fff !important;
+            .fa-caret-right {
+                margin-left: 10px;
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                -o-transition: all 1s ease;
+                -ms-transition: all 1s ease;
+                transition: all 1s ease;
+            }
+        }
+    }
+}
+
+.page-locations {
+    .content .entry {
+        background-color: #f7f6f6;
+    }
+}

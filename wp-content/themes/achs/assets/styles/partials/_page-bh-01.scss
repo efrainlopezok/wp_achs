@@ -1,0 +1,138 @@
+.tag-title {
+    color: #004420;
+}
+
+.page-services-01 {
+    .service-files {
+        padding-top: 0px !important;
+        .row {
+            .col {
+                text-align: center;
+                min-height: 150px;
+                &:nth-child(odd) {
+                    background-color: #3a734b;
+                    &:hover {
+                        background-color: #468b5b;
+                        .fa-download {
+                            margin-left: 10px;
+                            -webkit-transition: all 1s ease;
+                            -moz-transition: all 1s ease;
+                            -o-transition: all 1s ease;
+                            -ms-transition: all 1s ease;
+                            transition: all 1s ease;
+                        }
+                    }
+                }
+                &:nth-child(even) {
+                    background-color: #295135;
+                    &:hover {
+                        background-color: #316240;
+                        .fa-download {
+                            margin-left: 10px;
+                            -webkit-transition: all 1s ease;
+                            -moz-transition: all 1s ease;
+                            -o-transition: all 1s ease;
+                            -ms-transition: all 1s ease;
+                            transition: all 1s ease;
+                        }
+                    }
+                }
+                a {
+                    color: #fff;
+                    padding: 60px 0;
+                    display: block;
+                    font-family: $secondaryFont;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    @media only screen and (max-width: 500px) {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+    .services {
+        h2 {
+            text-align: center;
+            font-size: 40px;
+            text-transform: uppercase;
+            margin-bottom: 6rem
+        }
+        h3 {
+            font-size: 20px;
+            opacity: 0;
+        }
+        .row {
+            .col {
+                .service {
+                    &:hover {
+                        h3 {
+                            opacity: 1;
+                        }
+                    }
+                }
+                max-width: 12.5%;
+                .service-image {
+                    width: 125px;
+                    height: 125px;
+                    .service-image-hover {
+                        width: 125px;
+                        height: 125px;
+                        .service-white-transparent {
+                            width: 123px;
+                            height: 123px;
+                        }
+                    }
+                }
+                @media only screen and (max-width: 1140px) {
+                    .service-image {
+                        width: 90px;
+                        height: 90px;
+                        .service-image-hover {
+                            width: 90px;
+                            height: 90px;
+                            .service-white-transparent {
+                                width: 88px;
+                                height: 88px;
+                            }
+                        }
+                    }
+                }
+                @media only screen and (max-width: 800px) {
+                    max-width: 100%;
+                }
+                @media only screen and (max-width: 600px) {
+                    .service-image {
+                        width: 120px;
+                        height: 120px;
+                        .service-image-hover {
+                            width: 120px;
+                            height: 120px;
+                            .service-white-transparent {
+                                width: 118px;
+                                height: 118px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .call-action {
+        margin-top: 0px;
+        background-image: url("assets/images/women-bkg.jpg");
+        &:after {
+            background-color: rgba(36, 77, 96, .8);
+        }
+        .call-content {
+            max-width: 800px;
+            margin: 0 auto;
+            float: none;
+            p {
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
+    }
+}

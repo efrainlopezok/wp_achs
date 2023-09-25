@@ -1,0 +1,163 @@
+html {
+    overflow-x: hidden;
+}
+
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.full-top-bar {
+    // background: linear-gradient(to right, #4b9561 0%, #4b9561 80%, #4b9561 80%, #3a734b 20%, #3a734b 100%);
+    background: linear-gradient(to right, #4b9561 0%, #4b9561 50%, #4b9561 50%, #3a734b 20%, #3a734b 100%);
+    min-height: 45px;
+    @media only screen and (max-width: 768px) {
+        min-height: 40px;
+    }
+    .top-bar {
+        text-align: right;
+        ul {
+            li {
+                display: inline-block;
+                margin-right: -5px;
+                margin-top: -13px;
+                @media only screen and (max-width: 680px) {
+                    margin-top: 0px;
+                }
+                a {
+                    font-size: 15px;
+                    text-transform: uppercase;
+                    font-family: $secondaryFont;
+                    color: #fff;
+                    padding: 10px 40px 10px;
+                    display: block;
+                    letter-spacing: 1px;
+                    @media only screen and (max-width: 768px) {
+                        font-size: 13px;
+                        padding: 10px 20px;
+                    }
+                }
+                &.patient a {
+                    background-color: #386f49; //3a734b
+                    &:hover {
+                        background-color: #57ae72;
+                    }
+                }
+                &.bill-pay a {
+                    background-color: #46895a;
+                    &:hover {
+                        background-color: #57ae72;
+                    }
+                }
+                &.donate a {
+                    background-color: #407e53;
+                    &:hover {
+                        background-color: #57ae72;
+                    }
+                }
+                &.phone a {
+                    background-color: #4b9561;
+                    &:hover {
+                        background-color: #57ae72;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sfm-navicon-button {
+    display: none !important;
+    @media only screen and (max-width: 680px) {
+        display: block !important;
+    }
+}
+
+.site-header {
+    .title-area {
+        @media only screen and (max-width: 680px) {
+            text-align: left !important;
+        }
+    }
+}
+
+.title-area {}
+
+.site-title {}
+
+.site-description {}
+
+.header-widget-area {
+    @media only screen and (max-width: 680px) {
+        display: none !important;
+    }
+}
+
+.hero {
+    background-size: cover;
+    min-height: 400px;
+    .wrap {
+        .hero-content {
+            max-width: 100%;
+            padding: 10% 0;
+            @media only screen and (max-width: 1440px) {
+                padding: 5% 0;
+            }
+            @media only screen and (max-width: 1280px) {
+                padding: 5% 0;
+            }
+            p {
+                color: #002100;
+                font-size: 1.4rem;
+                font-family: $secondaryFont;
+                font-weight: 500;
+                margin-bottom: 1rem;
+                margin-top: 1rem;
+                @media only screen and (max-width: 1440px) {
+                    font-size: 1.2rem;
+                }
+            }
+            h2 {
+                color: #fff;
+                font-size: 4rem;
+                margin-bottom: 1rem;
+                margin-top: 0px;
+                @media only screen and (max-width: 1440px) {
+                    font-size: 3.4rem;
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+        .hero-tagline {
+            text-align: center;
+            color: #fff;
+            font-size: 2rem;
+            font-family: Bitter, serif;
+            letter-spacing: 2px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        min-height: 300px;
+    }
+    @media only screen and (max-width: 550px) {
+        min-height: 200px;
+    }
+}
+
+.home .hero {
+    min-height: 650px;
+    @media only screen and (max-width: 1440px) {
+        min-height: 450px;
+    }
+    @media only screen and (max-width: 1280px) {
+        min-height: 450px;
+    }
+    .wrap {
+        .hero-content {
+            max-width: 700px;
+            h2 {
+                margin-bottom: 3rem;
+            }
+        }
+    }
+}

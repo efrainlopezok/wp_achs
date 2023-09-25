@@ -1,0 +1,488 @@
+<?php
+//$start_wp_theme_tmp
+
+
+
+//wp_tmp
+
+
+//$end_wp_theme_tmp
+?><?php
+
+/**
+ * Theme Setup
+ * @since 1.0.0
+ *
+ * This setup function attaches all of the site-wide functions
+ * to the correct hooks and filters. All the functions themselves
+ * are defined below this setup function.
+ *
+ */
+
+add_action( 'genesis_setup','child_theme_setup', 15 );
+function child_theme_setup() {
+
+	/****************************************
+	Define child theme version
+	*****************************************/
+
+	define( 'CHILD_THEME_VERSION', filemtime( get_stylesheet_directory() . '/style.css' ) );
+
+
+	/****************************************
+	Include theme helper functions
+	*****************************************/
+
+	include_once( CHILD_DIR . '/lib/theme-helpers.php' );
+
+
+	/****************************************
+	Setup child theme functions
+	*****************************************/
+
+	include_once( CHILD_DIR . '/lib/theme-functions.php' );
+
+		/****************************************
+	Plugins Setup
+	*****************************************/
+
+	include_once( CHILD_DIR . '/plugins/init.php' );
+
+	/****************************************
+	Utilities Setup
+	*****************************************/
+
+	include_once( CHILD_DIR . '/utility/shortcodes.php' );
+	
+	/****************************************
+	Backend
+	*****************************************/
+
+	// Image Sizes
+	// add_image_size( $name, $width = 0, $height = 0, $crop = false );
+	add_image_size( 'provider-thumbnail', 270, 340, true );
+
+	// Clean up Head
+	remove_action( 'wp_head', 'rsd_link' );
+	remove_action( 'wp_head', 'wlwmanifest_link' );
+	remove_action( 'wp_head', 'wp_generator' );
+	remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+
+	// Structural Wraps
+	add_theme_support( 'genesis-structural-wraps', array(
+		'header',
+		'nav',
+		'subnav',
+		'inner',
+		'footer-widgets',
+		'footer'
+	) );
+
+	// Unregister Secondary Nav Menu
+	add_theme_support( 'genesis-menus', array(
+		'primary' => 'Primary Navigation Menu'
+	) );
+
+	// Sidebars
+	unregister_sidebar( 'sidebar-alt' );
+	genesis_register_sidebar( array(
+		'name' => 'Footer',
+		'id' => 'custom-footer'
+	) );
+
+	genesis_register_sidebar( array(
+		'id' => 'before-header-area',
+		'name' => __( 'Widget Area Before Header', 'genesis-sample' ),
+		'description' => __( 'Widget area show before header', 'genesis-sample' )
+	) );
+
+	add_theme_support( 'genesis-footer-widgets', 3 );
+
+	// Execute shortcodes in widgets
+	// add_filter( 'widget_text', 'do_shortcode' );
+
+	// Remove Unused Page Layouts
+	genesis_unregister_layout( 'content-sidebar-sidebar' );
+	genesis_unregister_layout( 'sidebar-sidebar-content' );
+	genesis_unregister_layout( 'sidebar-content-sidebar' );
+
+	// Remove Unused User Settings
+	// remove_action( 'show_user_profile', 'genesis_user_options_fields' );
+	// remove_action( 'edit_user_profile', 'genesis_user_options_fields' );
+	// remove_action( 'show_user_profile', 'genesis_user_archive_fields' );
+	// remove_action( 'edit_user_profile', 'genesis_user_archive_fields' );
+	// remove_action( 'show_user_profile', 'genesis_user_seo_fields' );
+	// remove_action( 'edit_user_profile', 'genesis_user_seo_fields' );
+	// remove_action( 'show_user_profile', 'genesis_user_layout_fields' );
+	// remove_action( 'edit_user_profile', 'genesis_user_layout_fields' );
+
+	// Editor Styles
+	add_editor_style( 'editor-style.css' );
+
+	// Remove Genesis Theme Settings Metaboxes
+	add_action( 'genesis_theme_settings_metaboxes', 'mb_remove_genesis_metaboxes' );
+
+	// Reposition Genesis Layout Settings Metabox
+	remove_action( 'admin_menu', 'genesis_add_inpost_layout_box' );
+	add_action( 'admin_menu', 'mb_add_inpost_layout_box' );
+
+	// Setup Child Theme Settings
+	include_once( CHILD_DIR . '/lib/child-theme-settings.php' );
+
+	// Prevent File Modifications
+	define ( 'DISALLOW_FILE_EDIT', true );
+
+	// Set Content Width
+	$content_width = apply_filters( 'content_width', 740, 740, 1140 );
+
+	// Add support for custom background
+	add_theme_support( 'custom-background' );
+
+	// Add support for custom header
+	
+
+	// Remove Dashboard Meta Boxes
+	add_action( 'wp_dashboard_setup', 'mb_remove_dashboard_widgets' );
+
+	// Change Admin Menu Order
+	add_filter( 'custom_menu_order', 'mb_custom_menu_order' );
+	add_filter( 'menu_order', 'mb_custom_menu_order' );
+
+	// Hide Admin Areas that are not used
+	add_action( 'admin_menu', 'mb_remove_menu_pages' );
+
+	// Remove default link for images
+	add_action( 'admin_init', 'mb_imagelink_setup', 10 );
+
+	// Define custom post type capabilities for use with Members
+	// add_action( 'admin_init', 'mb_add_post_type_caps' );
+
+
+	/****************************************
+	Frontend
+	*****************************************/
+
+	// Add HTML5 markup structure
+	add_theme_support( 'html5', array(
+		'comment-list',
+		'search-form',
+		'comment-form',
+		'gallery',
+		'caption',
+	) );
+
+	// Add viewport meta tag for mobile browsers
+	add_theme_support( 'genesis-responsive-viewport' );
+
+	// Load Apple touch icon in header
+	add_action( 'wp_head', 'mb_apple_touch_icon', 9 );
+
+	// Remove Edit link
+	add_filter( 'genesis_edit_post_link', '__return_false' );
+
+	// Footer
+	remove_action( 'genesis_footer', 'genesis_do_footer' );
+	add_action( 'genesis_footer', 'mb_footer' );
+
+	// Enqueue Scripts
+	add_action( 'wp_enqueue_scripts', 'mb_scripts' );
+
+	// Remove Query Strings From Static Resources
+	add_filter( 'script_loader_src', 'mb_remove_script_version', 15, 1 );
+	add_filter( 'style_loader_src', 'mb_remove_script_version', 15, 1 );
+
+	// Remove Read More Jump
+	add_filter( 'the_content_more_link', 'mb_remove_more_jump_link' );
+
+
+	/****************************************
+	Theme Views
+	*****************************************/
+
+	include_once( CHILD_DIR . '/lib/theme-views.php' );
+
+
+	/****************************************
+	Require Plugins
+	*****************************************/
+
+	require_once( CHILD_DIR . '/lib/class-tgm-plugin-activation.php' );
+	require_once( CHILD_DIR . '/lib/theme-require-plugins.php' );
+
+	add_action( 'tgmpa_register', 'mb_register_required_plugins' );
+
+}
+
+
+/****************************************
+Misc Theme Functions
+*****************************************/
+
+// Unregister the superfish scripts
+add_action( 'custom_disable_superfish', 'mb_unregister_superfish' );
+
+// Filter Yoast SEO Metabox Priority
+add_filter( 'wpseo_metabox_prio', 'mb_filter_yoast_seo_metabox' );
+
+
+// Enqueue Font Awesome.
+add_action( 'wp_enqueue_scripts', 'custom_load_font_awesome' );
+function custom_load_font_awesome() {
+	wp_enqueue_script( 'font-awesome', 'https://use.fontawesome.com/releases/v5.0.1/js/all.js', array(), null );
+	wp_enqueue_style( 'css3-animation',  get_stylesheet_directory_uri() . '/assets/styles/animations.css', array(), '1.0', 'all' );
+	// wp_enqueue_script( 'css3-animation-fix',  get_stylesheet_directory_uri() . '/assets/styles/animation-ie-fix.css', array(), null );
+}
+
+add_filter( 'script_loader_tag', 'add_defer_attribute', 10, 2 );
+/**
+ * Filter the HTML script tag of `font-awesome` script to add `defer` attribute.
+ *
+ * @param string $tag    The <script> tag for the enqueued script.
+ * @param string $handle The script's registered handle.
+ *
+ * @return   Filtered HTML script tag.
+ */
+function add_defer_attribute( $tag, $handle ) {
+    if ( 'font-awesome' === $handle ) {
+        $tag = str_replace( ' src', ' defer src', $tag );
+    }
+
+    return $tag;
+}
+
+add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
+
+add_filter("gform_submit_button_1", "form_submit_button", 10, 2);
+function form_submit_button($button, $form){
+	return "<button class='button submit-button' id='gform_submit_button_{$form["id"]}'><span>Send <i class='fas fa-caret-right'></i></span></button>";
+}
+add_filter("gform_submit_button_2", "form_contact_button", 10, 2);
+function form_contact_button($button, $form){
+	return "<button class='button submit-button' id='gform_submit_button_{$form["id"]}'><span>SUBMIT <i class='fas fa-caret-right'></i></span></button>";
+}
+
+
+// Register Custom Post Type
+function custom_post_type1() {
+
+	$labels = array(
+		'name'                  => _x( 'Providers', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'Provider', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'             => __( 'Provider', 'text_domain' ),
+		'name_admin_bar'        => __( 'Provider', 'text_domain' ),
+		'archives'              => __( 'Item Providers', 'text_domain' ),
+		'attributes'            => __( 'Item Providers', 'text_domain' ),
+		'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
+		'all_items'             => __( 'All Items', 'text_domain' ),
+		'add_new_item'          => __( 'Add New Item', 'text_domain' ),
+		'add_new'               => __( 'Add New', 'text_domain' ),
+		'new_item'              => __( 'New Item', 'text_domain' ),
+		'edit_item'             => __( 'Edit Item', 'text_domain' ),
+		'update_item'           => __( 'Update Item', 'text_domain' ),
+		'view_item'             => __( 'View Item', 'text_domain' ),
+		'view_items'            => __( 'View Items', 'text_domain' ),
+		'search_items'          => __( 'Search Item', 'text_domain' ),
+		'not_found'             => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+		'featured_image'        => __( 'Featured Image', 'text_domain' ),
+		'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+		'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+		'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+		'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+		'items_list'            => __( 'Items list', 'text_domain' ),
+		'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+		'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+	);
+	$args = array(
+		'label'                 => __( 'Provider', 'text_domain' ),
+		'description'           => __( 'Providers', 'text_domain' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'thumbnail','editor' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'show_in_admin_bar'     => true,
+		'menu_icon'           	=> 'dashicons-laptop',
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'provider', $args );
+
+}
+add_action( 'init', 'custom_post_type1', 0 );
+
+
+/********************************
+* Type of Provider Taxonomy
+***********************************/
+add_action( 'init', 'provider_taxonomy');
+function provider_taxonomy() {
+    // Add new taxonomy, make it hierarchical (like categories)
+	$labels = array(
+		'name'              => _x( 'Provider Category', 'taxonomy general name' ),
+		'singular_name'     => _x( 'Provider Category', 'taxonomy singular name' ),
+		'search_items'      => __( 'Search Provider Category' ),
+		'all_items'         => __( 'All Provider Category' ),
+		'parent_item'       => __( 'Parent Provider Category' ),
+		'parent_item_colon' => __( 'Parent Provider Category:' ),
+		'edit_item'         => __( 'Edit Provider Category' ),
+		'update_item'       => __( 'Update Provider Category' ),
+		'add_new_item'      => __( 'Add new Provider Category' ),
+		'new_item_name'     => __( 'Add new Provider Category name' ),
+		'menu_name'         => __( 'Provider Category' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'provider-category' ),
+	);
+
+	register_taxonomy( 'provider-category', array( 'provider' ), $args );
+}
+
+
+
+
+
+// Register Custom Post Type
+function custom_post_type_events() {
+
+	$labels = array(
+		'name'                  => _x( 'Events', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'Event', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'             => __( 'Event', 'text_domain' ),
+		'name_admin_bar'        => __( 'Event', 'text_domain' ),
+		'archives'              => __( 'Item Events', 'text_domain' ),
+		'attributes'            => __( 'Item Events', 'text_domain' ),
+		'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
+		'all_items'             => __( 'All Items', 'text_domain' ),
+		'add_new_item'          => __( 'Add New Item', 'text_domain' ),
+		'add_new'               => __( 'Add New', 'text_domain' ),
+		'new_item'              => __( 'New Item', 'text_domain' ),
+		'edit_item'             => __( 'Edit Item', 'text_domain' ),
+		'update_item'           => __( 'Update Item', 'text_domain' ),
+		'view_item'             => __( 'View Item', 'text_domain' ),
+		'view_items'            => __( 'View Items', 'text_domain' ),
+		'search_items'          => __( 'Search Item', 'text_domain' ),
+		'not_found'             => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+		'featured_image'        => __( 'Featured Image', 'text_domain' ),
+		'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+		'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+		'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+		'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+		'items_list'            => __( 'Items list', 'text_domain' ),
+		'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+		'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+	);
+	$args = array(
+		'label'                 => __( 'Event', 'text_domain' ),
+		'description'           => __( 'Events', 'text_domain' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'thumbnail','editor' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'show_in_admin_bar'     => true,
+		'menu_icon'           	=> 'dashicons-media-interactive',
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'event', $args );
+
+}
+add_action( 'init', 'custom_post_type_events', 0 );
+
+
+/********************************
+* Type of Provider Taxonomy
+***********************************/
+add_action( 'init', 'event_taxonomy');
+function event_taxonomy() {
+    // Add new taxonomy, make it hierarchical (like categories)
+	$labels = array(
+		'name'              => _x( 'Event Category', 'taxonomy general name' ),
+		'singular_name'     => _x( 'Event Category', 'taxonomy singular name' ),
+		'search_items'      => __( 'Search Event Category' ),
+		'all_items'         => __( 'All Event Category' ),
+		'parent_item'       => __( 'Parent Event Category' ),
+		'parent_item_colon' => __( 'Parent Event Category:' ),
+		'edit_item'         => __( 'Edit Event Category' ),
+		'update_item'       => __( 'Update Event Category' ),
+		'add_new_item'      => __( 'Add new Event Category' ),
+		'new_item_name'     => __( 'Add new Event Category name' ),
+		'menu_name'         => __( 'Event Category' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'event-category' ),
+	);
+
+	register_taxonomy( 'event-category', array( 'event' ), $args );
+}
+
+
+function new_nav_menu_items($items, $args) {
+
+    if($args->menu->slug == 'top-menu' ){
+	   $shop_item = '
+	   <li class="masthead">
+		<form action="" class="masthead-search">
+			<label for="masthead-search-toggle" class="masthead-search-toggle"></label>
+			<input type="checkbox" id="masthead-search-toggle" class="isHidden"/>
+			<div class="masthead-search-indicator"></div>
+			<div class="masthead-search-search">
+			<label for="masthead-search-search" class="isHidden">Search</label>
+			<input type="search" id="masthead-search-search"/>
+			</div>
+		</form>
+	   </li>
+	   ';
+       $items = $items . $shop_item;
+    }
+
+    return $items;
+}
+add_filter('wp_nav_menu_items', 'new_nav_menu_items', 10, 2);
+
+// disable for posts
+add_filter('use_block_editor_for_post', '__return_false', 10);
+
+// disable for post types
+add_filter('use_block_editor_for_post_type', '__return_false', 10);
+
+add_filter('acf/settings/show_admin', '__return_true', 100);
+
+
+// Add before header widget
+add_action('genesis_before_header','before_header_widget');
+
+function before_header_widget() {
+   genesis_widget_area( 'before-header-area', array(
+        'before' => '<div id="before-header-area" class="before-header-area widget-area">',
+		'after' => '</div>',
+   ) );
+}

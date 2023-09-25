@@ -1,0 +1,130 @@
+.page-services-02 {
+    .sidebar {
+        .widget-title {
+            padding: 10px 10px;
+            color: #17516b;
+            text-transform: capitalize;
+            font-size: 25px;
+        }
+        .menu {
+            li {
+                border-bottom: 1px solid #e4e5e6;
+                margin: 0px;
+                padding: 10px;
+                list-style: none !important;
+                a {
+                    font-size: 18px;
+                    color: #4e514e;
+                    font-family: $secondaryFont;
+                    letter-spacing: 1px;
+                    font-weight: 500;
+                }
+                &.current-menu-item,
+                &:hover {
+                    background-color: #ccc;
+                    border-bottom: 1px solid #ccc;
+                    a {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .widget_text {
+            .textwidget>p {
+                &:first-child {
+                    margin-bottom: 0px;
+                }
+            }
+            h3 {
+                font-size: 23px;
+                color: #4b9561;
+                margin-top: 0px;
+            }
+            a {
+                color: #f88e1b!important;
+                border: 2px solid #f88e1b;
+                background-color: transparent!important;
+                font-weight: 500;
+                font-family: Ubuntu, sans-serif;
+                font-size: 16px;
+                text-decoration: none;
+                display: inline-block;
+                min-height: 49px;
+                min-width: 230px;
+                line-height: 30px;
+                padding: 0 2rem;
+                text-transform: uppercase;
+                vertical-align: middle;
+                margin-top: 20px;
+                text-align: center;
+                padding: 10px;
+                &:hover {
+                    background-color: #f88e1b !important;
+                    color: #fff !important;
+                    .fa-caret-right {
+                        margin-left: 10px;
+                        -webkit-transition: all 1s ease;
+                        -moz-transition: all 1s ease;
+                        -o-transition: all 1s ease;
+                        -ms-transition: all 1s ease;
+                        transition: all 1s ease;
+                    }
+                }
+            }
+        }
+    }
+    hr {
+        border: 1px solid #f4f4f5;
+        /* padding: 50px 0px; */
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .download-items {
+        margin-left: 0px;
+        li {
+            display: inline-block;
+            width: 40%;
+            a {
+                color: #f88e1b;
+                font-size: 17px;
+                text-transform: capitalize;
+                letter-spacing: 1px;
+                font-family: $secondaryFont;
+                font-weight: 500;
+                svg {
+                    margin-right: 10px;
+                    position: relative;
+                    bottom: 0px;
+                }
+                &:hover {
+                    color: #000;
+                    -webkit-transition: all 1s ease;
+                    -moz-transition: all 1s ease;
+                    -o-transition: all 1s ease;
+                    -ms-transition: all 1s ease;
+                    transition: all 1s ease;
+                    .fa-download {
+                        color: #000;
+                        -webkit-transition: all 1s ease;
+                        -moz-transition: all 1s ease;
+                        -o-transition: all 1s ease;
+                        -ms-transition: all 1s ease;
+                        transition: all 1s ease;
+                        bottom: -5px;
+                    }
+                }
+            }
+            @media only screen and (max-width: 1140px) {
+                width: 45%;
+                a {
+                    font-size: 15px;
+                }
+            }
+            @media only screen and (max-width: 550px) {
+                a {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+form {}
+
+
+/* Gravity Forms */
+
+.gform_wrapper {}
+
+.gform_heading {}
+
+.gform_description {}
+
+.gform_body {}
+
+.gform_fields {}
+
+.gfield {}
+
+.ginput_container {}
+
+.gform_footer {}
+
+.gform_button {}
+
+.btn {
+    min-width: 250px;
+    min-height: 60px;
+    border-radius: 0px !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    font-family: $secondaryFont;
+    font-weight: 500;
+    padding: 11px 10px !important;
+    &.btn-orange {
+        background-color: #f88e1b !important;
+        &:hover {
+            background-color: #f4a34c !important;
+            .fa-caret-right {
+                margin-left: 10px;
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                -o-transition: all 1s ease;
+                -ms-transition: all 1s ease;
+                transition: all 1s ease;
+            }
+        }
+    }
+    &.btn-blue {
+        background-color: #17516b !important;
+        &:hover {
+            background-color: #23789e !important;
+            .fa-caret-right {
+                margin-left: 10px;
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                -o-transition: all 1s ease;
+                -ms-transition: all 1s ease;
+                transition: all 1s ease;
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {}
+
+.footer-widgets-2 {
+    .widget_text {
+        p {
+            &:first-child {
+                margin-bottom: 20px;
+                padding-bottom: 25px;
+                border-bottom: 2px solid #f4f1f3;
+            }
+        }
+    }
+}

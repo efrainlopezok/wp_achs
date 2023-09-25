@@ -1,0 +1,47 @@
+/*!
+Theme Name: ACHS
+Theme URI: http://www.achs.com
+Description: ACHS Theme
+Author: ACHS Theme
+Author URI: http://www.achs.com
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Version: 1.0
+
+Template: genesis
+*/
+
+// Reset, Variables, Mixins, Etc
+// DO NOT EDIT ORDER OF FILES
+@import "partials/mixins";
+@import "partials/variables";
+// Genesis
+@import "partials/genesis";
+// General, Typography
+@import "partials/general";
+// Layout
+@import "partials/header";
+@import "partials/maincontent";
+@import "partials/footer";
+// Menus, Page and Post styles
+@import "partials/menus";
+@import "partials/page-post";
+// Page Templates
+@import "partials/page-home";
+@import "partials/page-blog";
+@import "partials/page-bh-01";
+@import "partials/page-bh-02";
+@import "partials/page-contact";
+@import "partials/page-provider";
+@import "partials/page-location";
+// Widgets, Search, Comments, Forms, Sharing
+@import "partials/widgets";
+@import "partials/comments";
+@import "partials/forms";
+// Materialize
+@import "materialize/materialize";
+// Slick
+@import "slick/slick";
+@import "slick/slick-theme";
+// Responsive
+@import "partials/responsive";

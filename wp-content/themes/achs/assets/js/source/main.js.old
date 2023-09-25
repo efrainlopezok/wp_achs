@@ -1,0 +1,32 @@
+(function($) {
+    // all Javascript code goes here
+    $('.tabs .tab a').on('click', function() {
+        var current_item = $(this);
+        $('.tab-dropdown .item-dropdown a').removeClass('active');
+        $('.tab-dropdown .item-dropdown').each(function() {
+            if (current_item.attr('href') == $(this).find('a').attr('href')) {
+                $(this).find('a').addClass('active');
+                $('.current-element-tab').text($(this).find('a').text());
+
+            }
+        });
+    });
+
+    $('.tab-dropdown .item-dropdown a').on('click', function(event) {
+        event.preventDefault();
+        var current_item = $(this);
+        $('.tab-dropdown').slideUp(500);
+        $('.tab-dropdown .item-dropdown a').removeClass('active');
+        $('.tabs .tab').each(function() {
+            if (current_item.attr('href') == $(this).find('a').attr('href')) {
+                $(this).find('a').trigger('click');
+            }
+        });
+
+    });
+
+    $('.current-element-tab').on('click', function(event) {
+        event.preventDefault();
+        $('.tab-dropdown').slideToggle(500);
+    });
+})(jQuery);
